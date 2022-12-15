@@ -1,0 +1,37 @@
+<%= form_with(model: haiku) do |form| %>
+  <% if haiku.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(haiku.errors.count, "error") %> prohibited this haiku from being saved:</h2>
+
+      <ul>
+        <% haiku.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :username, style: "display: block" %>
+    <%= form.text_field :username %>
+  </div>
+
+  <div>
+    <%= form.label :line1, style: "display: block" %>
+    <%= form.text_area :line1 %>
+  </div>
+
+  <div>
+    <%= form.label :line2, style: "display: block" %>
+    <%= form.text_area :line2 %>
+  </div>
+
+  <div>
+    <%= form.label :line3, style: "display: block" %>
+    <%= form.text_area :line3 %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

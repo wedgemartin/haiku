@@ -1,0 +1,1447 @@
+html, body {
+  height: 100%;
+  background-color: #f0f0f0;
+  color: #616264;
+  margin: 0px;
+  font-size: 14px;
+  font-family: arial, helvetica;
+}
+
+a:link {
+  text-decoration: none;
+  color: #616264;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #616264;
+}
+
+a:hover {
+  cursor: pointer;
+  text-decoration: none;
+  color: #616264;
+}
+
+a:active {
+  text-decoration: none;
+  color: #616264;
+}
+
+#root {
+  z-index: -1;
+  height: 100%;
+}
+
+.itemDiv {
+  border: solid 1px #c0c0c0;
+}
+
+.profileMenuImage {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.fakeLink {
+  color: #01aef0;
+  cursor: pointer;
+}
+
+.itemExpander {
+  display: inline-block;
+  width: 12px;
+}
+
+.itemName {
+  display: inline-block;
+  width: 111px;
+  height: 15px;
+  padding: 8px;
+}
+
+.itemEdit {
+  display: inline-block;
+  width: 11px;
+  height: 15px;
+  padding: 8px;
+  vertical-align: bottom;
+}
+
+.itemDesc {
+  display: inline-block;
+  width: 212px;
+  height: 15px;
+  padding: 8px;
+}
+
+.itemSerial {
+  display: inline-block;
+  width: 102px;
+  height: 15px;
+  padding: 8px;
+}
+
+.neighborsDiv {
+}
+
+.pointSpanPos {
+  color: #66b562;
+}
+
+.pointSpanNeg {
+  color: #f01010;
+}
+
+.adminMessage {
+  color: #00a0e0;
+}
+
+.message_search {
+  font-size: 14px;
+  padding: 4px;
+}
+
+.member_search {
+  font-size: 14px;
+  float: right;
+  padding-right: 6px;
+}
+
+.deleteButton {
+  margin-left: 6px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f03034;
+  color: #ffffff;
+  float: right;
+  padding-left: 6px;
+}
+
+.editPostButton {
+  margin-left: 2px;
+  border: none;
+  border-radius: 4px;
+  background-color: #515254;
+  color: #ffffff;
+  float: right;
+}
+
+.messageUserMenu {
+  width: 200px;
+  height: 300px;
+  background-color: #ffffff;
+  border: solid 1px #515254;
+  position: fixed;
+  z-index: 999999999;
+  padding: 6px;
+}
+
+.messageViewerUsername {
+  padding: 4px;
+  display: inline-block;
+  border-radius: 4px;
+  border: solid 2px #cccccc;
+  margin-right: 6px;
+}
+
+.messageViewerUsernameAdmin {
+  padding: 4px;
+  display: inline-block;
+  border-radius: 4px;
+  border: solid 2px #66b562;
+  margin-right: 6px;
+}
+
+.messageViewerBlockedUser {
+  padding: 4px;
+  display: inline-block;
+  border-radius: 4px;
+  border: solid 2px #f04040;
+  margin-right: 6px;
+}
+
+.messageViewerUsernameSuperAdmin {
+  padding: 4px;
+  display: inline-block;
+  border-radius: 4px;
+  border: solid 2px #01aef0;
+  margin-right: 6px;
+}
+
+.messageViewerTitle {
+  border: solid 1px #01aef0;
+  padding: 6px;
+  font-size: 16px;
+  color: #01aef0;
+}
+
+.pollData {
+  display: inline-block;
+  width: 144px;
+  text-align: right;
+  margin-right: 8px;
+}
+
+.pollBar {
+  background-color: #01aef0;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 1px;
+}
+
+.spinner {
+  width: 20px;
+  display: inline;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.unreadMessageSpan {
+  font-size: 12px;
+  color: #66b562;
+}
+
+.pollOptionInput {
+  display: inline-block;
+  width: 400px;
+  padding: 4px;
+  margin-top: 6px;
+}
+
+.pollOptionDisplay {
+  font-size: 14px;
+}
+
+.pollOptionDisplayBlue {
+  font-size: 14px;
+  color: #01aef0;
+  font-color: #01aef0;
+}
+
+.row {
+  vertical-align: top;
+  height: 18px;
+  display: block;
+  background-color: #ffffff;
+  padding: 4px 6px 15px 6px;
+}
+
+.rowGrey {
+  vertical-align: top;
+  height: 18px;
+  display: block;
+  background-color: #e7e8e9;
+  padding: 4px 6px 15px 6px;
+}
+
+.rowField {
+  vertical-align: top;
+  top: 0px;
+  left: 0px;
+  padding: 4px;
+  /* width: 200px; */
+  display: inline-block;
+  font-size: 12px;
+}
+
+.rowFieldItalic {
+  vertical-align: top;
+  padding: 4px;
+  /* width: 200px; */
+  display: inline-block;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.fundadorRoleLabel {
+  color: #66B562;
+  font-weight: bold;
+}
+
+.moderadorRoleLabel {
+  color: #01aef0;
+  font-weight: bold;
+}
+
+.editButton {
+  float: right;
+  cursor: pointer;
+}
+
+
+.convoSair {
+  float: right;
+}
+
+.rightFloater {
+  padding: 10px;
+  float: right;
+}
+
+.closeModalButton {
+  float: right;
+  font-size: 16px;
+  color: #6d6e7s;
+}
+
+.thankyou {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profileSubmitButton {
+  margin-left: 392px;
+  width: 120px;
+  border: 0;
+  margin-top: 10px;
+  background-color: #66b562;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 12px;
+  font-weight: bold;
+  height: 44px;
+  display: block;
+  /* float: right; */
+  margin-bottom: 12px;
+}
+
+.smallCancelButton {
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #515254;
+  padding: 4px;
+  min-width: 50px;
+  display: inline;
+}
+
+.smallSubmitButton {
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #66b562;
+  padding: 4px;
+  min-width: 50px;
+  display: inline;
+}
+
+.prevLinkReplyDiv {
+  padding: 12px;
+  background-color: #f2f4f6;
+}
+
+.prevLinkDiv {
+  padding: 12px;
+  background-color: #f2f4f6;
+  border-left: solid 1px #cccccc;
+  border-right: solid 1px #cccccc;
+}
+
+.comment {
+  padding-left: 12px;
+  padding-top: 12px;
+  border-left: solid 1px #cccccc;
+  border-right: solid 1px #cccccc;
+  background-color: #f2f4f6;
+  display: block;
+}
+
+.commentReply {
+  border: solid 1px #ff0000;
+  padding-left: 12px;
+  padding-top: 10px;
+  background-color: #f2f4f6;
+  border: none;
+  display: block;
+}
+
+.commentActions {
+  display: block;
+  padding-bottom: 6px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #b0b2b4;
+  height: 14px;
+}
+
+.commentActionFont {
+  color: #b0b2b4;
+  font-color: #b0b2b4;
+}
+
+.commentActionFontBlue {
+  color: #01aef0;
+  font-color: #01aef0;
+}
+
+.commentButtons {
+  z-index: 999999;
+  float: right;
+  top: 2px;
+  right: 60px;
+}
+
+.notificationsMenu {
+  max-height: 440px;
+  /* overflow: auto; */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 8px;
+  font-size: 11px;
+  position: static;
+  border: solid 2px #cccccc;
+  color: #505254;
+  background-color: #ffffff;
+  width: 360px;
+  margin-top: 0px;
+  margin-right: 100px;
+  float: right;
+  z-index: 999999999999;
+}
+
+.notificationInterior {
+  padding: 4px;
+  width: 300px;
+  float: right;
+  /* overflow: hidden;; */
+}
+
+
+.notificationsMenuInner {
+  background-color: #ffffff;
+}
+
+.notificationCounter {
+  padding: 4px;
+  text-align: center;
+  font-size: 11px;
+  border-radius: 4px;
+  position: relative;
+  color: #ffffff;
+  background-color: #ff0000;
+  width: 12px;
+  height: 12px;
+  margin-top: -60px;
+  margin-right: 188px;
+  float: right;
+  z-index: 999999999999;
+}
+
+.messageCounter {
+  padding: 4px;
+  text-align: center;
+  font-size: 11px;
+  border-radius: 4px;
+  position: relative;
+  color: #ffffff;
+  background-color: #ff0000;
+  width: 12px;
+  height: 12px;
+  margin-top: -60px;
+  margin-right: 135px;
+  float: right;
+  z-index: 999999999999;
+}
+
+.notification {
+  padding: 6px;
+  display: inline-block;
+  border-bottom: solid 1px #cccccc;
+  /* overflow: scroll; */
+  width: 344px;
+}
+
+.messageBody {
+  padding-left: 8px;
+  display: inline-block;
+  width: 350px;
+}
+
+.messageBodyInput {
+  white-space: pre-line;
+  outline: none;
+  vertical-align: top;
+  font-size: 14px;
+  height: 34px;
+  display: inline-block;
+  border: none;
+  width: 420px;
+  background-color: #f4f6f8;
+}
+
+.messageCreator {
+  position: fixed;
+  bottom: 0px;
+  vertical-align: bottom;
+  padding: 12px 12px 6px 12px;
+  border-top: solid 1px #cccccc;
+  width: 520px;
+  min-height: 28px;
+  display: block;
+  background-color: #f4f6f8;
+}
+
+.commentCreator {
+  padding: 12px 12px 6px 12px;
+  border: solid 1px #cccccc;
+  min-height: 32px;
+  background-color: #f4f6f8;
+}
+
+.commentInput {
+  margin-top: -28px;
+  font-size: 14px;
+  height: 22px;
+  display: block;
+  margin-left: 38px;
+  border: none;
+  width: 440px;
+  background-color: #f4f6f8;
+}
+
+.replyInput {
+  margin-top: -28px;
+  font-size: 14px;
+  height: 22px;
+  display: block;
+  margin-left: 38px;
+  border: none;
+  width: 424px;
+}
+
+.commentHeader {
+  display: inline-block;
+  min-width: 200px;
+}
+
+.commentHeaderText {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.post {
+  margin-top: 18px;
+  display: block;
+  border: solid 1px #cccccc;
+  padding: 10px 10px 4px 10px;
+}
+
+.badPost {
+  margin-top: 10px;
+  height: 40px;
+  border: solid 1px #cccccc;
+  padding: 10px 10px 4px 10px;
+  background-color: #c7c9cb;
+}
+
+.postBody {
+  margin-top: 3px;
+  white-space: pre-line;
+}
+
+.activityRow {
+  padding: 10px;
+  border-top: solid 1px #cccccc;
+}
+
+.rightFloatText {
+  font-size: 14px;
+  position: absolute;
+  top: 14px;
+  right: 30px;
+  color: #6D6E72;
+}
+
+.signupFoundArea {
+  color: #66B562;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  margin-top: 100px;
+  background-color: #ffffff;
+  border: solid 1px #515254;
+  width: 500px;
+  padding: 10px;
+}
+
+.mainBanner {
+  color: #66B562;
+  float: left;
+  margin-left: 270px;
+  margin-right: auto;
+  margin-top: 10px;
+  font-size: 16px;
+  background-color: #ffffff;
+  border: solid 1px #515254;
+  width: 530px;
+  padding: 10px;
+}
+
+.bannerMessage {
+  color: #66B562;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  background-color: #ffffff;
+  border: solid 1px #515254;
+  width: 500px;
+  padding: 10px;
+}
+
+.bannerMessageRed {
+  color: #c55256;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  background-color: #ffffff;
+  border: solid 1px #c55256;
+  width: 500px;
+  padding: 10px;
+}
+
+.postHeader {
+  position: relative;
+  width: 200px;
+}
+
+.profileHeader {
+  position: relative;
+  margin-top: 10px;
+}
+
+.profileHeaderText {
+  float: right;
+  margin-right: 12px;
+  width: 356px;
+}
+
+.postHeaderText {
+  display: block;
+  margin-top: 2px;
+  margin-left: 46px;
+  width: 200px;
+}
+
+.timeAgo {
+  font-size: 12px;
+  color: #c7c9cb;
+}
+
+.postTitleText {
+  color: #6D6E72;
+  margin-top: 16px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.rightAlignDiv {
+  width: 100%;
+  text-align: right;
+}
+
+.verifyButton {
+  width: 210px;
+  border: 0;
+  margin-top: 10px;
+  background-color: #66b562;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 12px;
+  font-weight: bold;
+  height: 44px;
+  display: inline-block;
+}
+
+.submitInviteButton {
+  width: 110px;
+  height: 36px;
+  background-color: #66b562;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 9px;
+  font-weight: bold;
+  float: right;
+  margin-top: 6px;
+  margin-right: 14px;
+}
+
+.postTitleInputDiv {
+  position: relative;
+  width: 496px;
+  height: 40px;
+  padding-top: 0px;
+}
+
+.loginLinks {
+  cursor: pointer;
+  color: #80808f;
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 26px;
+  display: inline-block;
+  padding: 14px;
+}
+
+
+.postTitleInputInput {
+  outline: none;
+  border: none;
+  height: 22px;
+  padding: 4px;
+  position: absolute;
+  top: 6px;
+  width: 444px;
+  left: 42px;
+  font-size: 14px;
+}
+
+.logo {
+  width: 45px;
+  margin-top: 10px;
+  margin-left: 9px;
+  display: inline;
+}
+
+.loginButton {
+  border: 0;
+  margin-top: 10px;
+  width: 368px;
+  background-color: #66b562;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 12px;
+  font-weight: bold;
+  height: 44px;
+}
+
+.facebookLoginButton {
+  border: 0;
+  margin-top: 10px;
+  width: 368px;
+  background-color: #005dac;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 12px;
+  font-weight: bold;
+  height: 44px;
+}
+
+.profileMenu {
+  padding: 12px;
+  text-align: left;
+  margin-left: -30px;
+  margin-top: 12px;
+  position: static;
+  float: right;
+  font-size: 16px;
+  color: #939598;
+  background-color: #ffffff;
+  border: solid 1px #cccccc;
+  width: 210px;
+  z-index: 99999999;
+  height: 200px;
+}
+
+.profileMenuLabel {
+  position: absolute;
+  text-align: top;
+  margin-top: 6px;
+  margin-left: 10px;
+  display: inline;
+  padding-top: 4px;
+}
+
+.menuItem {
+  color: #939598;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.signupForm {
+  color: #515254;
+  line-height: 1.8em;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+
+.signupPage {
+  background-color: #e7e8e9;
+  color: #515254;
+  width: 100%;
+  overflow: hidden;
+  min-height: 800px;
+  height: 100vh;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.loginPage {
+  text-align: center;
+  background-color: #01aef0;
+  overflow: hidden;
+  width: 100%;
+  min-height: 800px;
+  height: 100vh;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.avatar {
+  width: 34px;
+  display: inline;
+  float: left;
+}
+
+.avatarLeft {
+  width: 32px;
+  display: inline;
+  float: left;
+}
+
+.avatarRight {
+  width: 36px;
+  display: inline;
+  float: right;
+}
+
+.avatarFull {
+  width: 120px;
+  display: inline;
+  float: left;
+}
+
+.profileName {
+  /* position: absolute; */
+  text-align: top;
+  margin-top: 0px;
+  margin-left: 0px;
+  display: inline-block;
+  padding-top: 0px;
+  text-decoration: none;
+}
+
+.anchor {
+  position: static;
+  height: 100%;
+}
+
+.logodiv {
+  position: static;
+  width: 1164px;
+  padding-left: 18px;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: top;
+}
+
+.main {
+  height: 100%;
+  text-align: top;
+  margin-top: 88px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1128px;
+  z-index: -1;
+}
+
+.profile {
+  position: fixed;
+  float: right;
+  text-align: right;
+  vertical-align: bottom;
+  width: 200px;
+  height: 86px;
+  font-size: 18px;
+  margin-left: 934px;
+  margin-top: -56px;
+  z-index: 99999;
+}
+
+.signupLogo {
+  display: inline-block;
+  position: absolute;
+  top: 4px;
+  margin-top: 6px;
+  left: 10px;
+}
+
+.loginLogo {
+  display: inline-block;
+  margin-left: auto;
+  margin-top: 220px;
+  margin-right: auto;
+}
+
+.logindiv {
+  text-align: left;
+  display: inline-block;
+  border: solid 1px #cccccc;
+  background-color: #ffffff;
+  color: #939598;
+  font-size: 20px;
+  width: 370px;
+  height: 310px;
+  margin-top: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 18px 14px 14px 14px;
+}
+
+.smallGreyFont {
+  color: #c7c9cb;
+  font-size: 12px;
+}
+
+.postImageFrame {
+  width: 100%;
+  background-color: #939598;
+  text-align: center;
+  padding: 0;
+  border: none;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.postImage {
+  max-width: 492px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -4px;
+}
+
+.postImagePreview {
+  margin-top: 6px;
+  display: block;
+  border: solid 1px #cccccc;
+  padding: 4px;
+}
+
+.postCreator {
+  overflow: auto;
+  min-height: 40px;
+  margin-top: 14px;
+  padding: 8px 8px 3px 8px;
+  border: solid 1px #cccccc;
+}
+
+.postSubmitButtonDiv {
+  overflow: auto;
+  height: auto;
+  min-height: 30px;
+  padding-top: 5px;
+  text-align: right;
+  margin-bottom: 4px;
+}
+
+.greyOverlay {
+  /* position: absolute; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 59666;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(200, 200, 200, 0.5);
+}
+
+
+.popupNeighbors {
+  /* float: left; */
+  width: 428px;
+  height: 75%;
+  /* position: relative; */
+  position: absolute;
+  top: 120px;
+}
+
+
+.basicModal {
+  position: static;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 150px;
+  z-index: 199099;
+  min-height: 350px;
+  width: 400px;
+  background-color: rgba(255, 255, 255, 1.0);
+  border: solid 1px #505050;
+  z-index: 99156677;
+  padding: 14px;
+}
+
+.postCancelButton {
+  font-size: 14px;
+  padding: 2px;
+  width: 80px;
+  border: 0;
+  background-color: #ffffff;
+  color: #66B562;
+  border: solid 2px #66B562;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.postCameraButton {
+  font-size: 14px;
+  padding: 4px;
+  width: 80px;
+  border: 0;
+  background-color: #66B562;
+  color: #ffffff;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.postSubmitButton {
+  font-size: 14px;
+  padding: 4px;
+  width: 80px;
+  border: 0;
+  background-color: #66B562;
+  color: #ffffff;
+  border-radius: 6px;
+}
+
+.postBodyInputDiv {
+  margin-top: 10px;
+  display: block;
+  height: 128px;
+  width: 496px;
+  border: solid 1px #66B562;
+}
+.postBodyInputInput {
+  position: absolute;
+  outline: none;
+  text-align: top;
+  border: none;
+  width: 470px;
+  height: 100px;
+  font-size: 14px;
+  margin-top: 6px;
+  margin-left: 2px;
+  padding: 8px;
+}
+
+.profileSummary {
+  resize: vertical;
+  overflow: auto;
+  width: 490px;
+  margin-bottom: 4px;
+}
+
+.searchInput {
+  position: fixed;
+  /* display: inline; */
+  text-align: left;
+  border: 0;
+  width: 300px;
+  font-size: 14px;
+  margin-top: 20px;
+  margin-left: 80px;
+  padding: 7px;
+  top: 0px;
+}
+
+.emailInput {
+  margin-left: 14px;
+  display: inline-block;
+  text-align: left;
+  border: 1px solid #cecece;
+  width: 360px;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 8px;
+}
+
+.logInput {
+  display: inline-block;
+  text-align: left;
+  border: 1px solid #cecece;
+  width: 350px;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 8px;
+}
+
+.shortInput {
+  display: inline-block;
+  text-align: left;
+  border: 1px solid #cecece;
+  width: 100px;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 8px;
+  margin-left: 14px;
+}
+
+.catSelector {
+  background-color: #ffffff;
+  width: 100px;
+  height: 26px;
+  font-size: 12px;
+  border: none;
+  float: left;
+}
+
+.stateSelector {
+  background-color: #ffffff;
+  width: 106px;
+  height: 34px;
+  font-size: 16px;
+  border: none;
+  margin-left: 14px;
+  margin-top: -4px;
+}
+
+.mediumInput {
+  display: inline-block;
+  text-align: left;
+  border: 1px solid #cecece;
+  width: 230px;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 8px;
+}
+
+.titlediv {
+  position: fixed;
+  top: 0px;
+  display: block;
+  background-color: #01AEF0;
+  width: 100%;
+  height: 70px;
+  font-size: 36px;
+  color: #f0f0f0;
+  z-index: 99999;
+}
+
+.titledivGreen {
+  position: fixed;
+  top: 0px;
+  display: block;
+  background-color: #66B562;
+  width: 100%;
+  height: 70px;
+  font-size: 36px;
+  color: #f0f0f0;
+  z-index: 99999;
+}
+
+.spacer {
+  width: 8px;
+  display: inline;
+}
+
+.convo {
+  width: 252px;
+  height: 36px;
+  padding: 6px;
+  display: block;
+}
+
+.conversationsDiv {
+  padding-top: 7px;
+  margin-right: 0px;
+  display: inline-block;
+  position: fixed;
+  border-right: solid 1px #e7e8e9;
+  width: 288px;
+  height: 100%;
+  background-color: #ffffff;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.conversationsInterior {
+  padding-bottom: 30px;
+  margin-bottom: 10px;
+  margin-right: 9px;
+  margin-top: 0px;
+  display: inline-block;
+  position: fixed;
+  width: 288px;
+  height: 90%;
+  background-color: #ffffff;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.menudiv {
+  padding: 0px;
+  margin-right: 9px;
+  display: inline-block;
+  position: fixed;
+  width: 248px;
+  min-height: 300px;
+  background-color: #ffffff;
+}
+
+.menuInner {
+  margin: 14px;
+}
+
+.menuIcon {
+  width: 30px;
+  display: inline;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.headerIcon {
+  float: right;
+  margin-top: -68px;
+  position: relative;
+  display: inline-block;
+  top: 15px;
+  right: 100px;
+  z-index: 99999999;
+}
+
+.addHeader {
+  margin-right: -10px;
+}
+.chatHeader {
+  margin-right: 40px;
+}
+.bellHeader {
+  margin-right: 96px;
+}
+
+
+.messageViewer {
+  position: fixed;
+  padding: 0px;
+  margin-left: 265px;
+  margin-right: 9px;
+  margin-bottom: 40px;
+  display: inline-block;
+  width: 544px;
+  min-height: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #ffffff;
+}
+
+.convoTitle {
+  padding: 8px;
+  position: fixed;
+  margin-bottom: 10px;
+  z-index: 49999;
+  width: 528px;
+  display: inline;
+  border-bottom: solid 1px #c7c8c0;
+  background-color: #ffffff;
+}
+
+.messageViewerInner {
+  /* width: 512px; */
+  width: calc(100% + 50px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+}
+
+.timeline {
+  overflow: auto;
+  position: relative;
+  padding: 0px;
+  margin-left: 265px;
+  margin-right: 9px;
+  display: inline-block;
+  width: 544px;
+  min-height: 300px;
+  background-color: #ffffff;
+}
+
+.timelineInner {
+  position: relative;
+  overflow: auto;
+  display: inline-block;
+  margin: 0px 14px 14px 14px;
+  min-height: 390px;
+}
+
+.rightdiv {
+  vertical-align: top;
+  padding: 0px;
+  display: inline-block;
+  /* display: inline-block; */
+  /* float: right; */
+  margin-left: 9px;
+  /* position: fixed; */
+  position: relative;
+  float: right;
+  top: 0px;
+  width: 300px;
+  min-height: 380px;
+  /* background-color: #ffffff; */
+}
+
+
+.rightInnerFixedWrapper {
+  position: absolute;
+  width: 280px;
+  top: 0px;
+}
+
+.rightInner {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #717274;
+  margin-top: 300px;
+  margin: 0px;
+}
+
+.rightInnerFixed {
+  position: fixed;
+  width: 300px;
+  min-height: 380px;
+  background-color: #ffffff;
+}
+
+.footerHr {
+  height: 1px;
+  margin-top: 300px;
+  width: 95%;
+  border: none;
+  background-color: #c1c2c4;
+}
+
+.postHr {
+  width: 492px;
+  color: #c1c2c4;
+  height: 1px;
+  border: none;
+  margin-top: 18px;
+  background-color: #c1c2c4;
+}
+
+.normalSmallText {
+  font-size: 14px;
+  color: #939598;
+  font-weight: normal;
+}
+
+.gostaText {
+  color: #515254;
+  margin-top: 20px;
+  height: 24px;
+  font-size: 12px;
+  font-weight: bold;
+  vertical-align: top;
+  display: inline;
+}
+
+.thumb {
+  margin-top: -10px;
+  display: inline-block;
+}
+
+.lightLink {
+  color: #c7c9cb;
+}
+
+.whiteLink {
+  color: #ffffff;
+}
+
+.postCategory {
+  float: right;
+  font-size: 14px;
+  font-weight: bold;
+  color: #c7c9cb;
+}
+
+.postStats {
+  color: #818284;
+  text-align: right;
+  font-size: 12px;
+  width: 486px;
+  margin-top: 6px;
+  display: inline-block;
+  height: 20px;
+}
+
+.message {
+  width: 400px;
+  padding: 6px;
+  display: block;
+  float: left;
+  border: solid 1px #caccce;
+  margin-bottom: 8px;
+  border-radius: 6px;
+}
+
+.messageOurs {
+  width: 400px;
+  padding: 6px;
+  display: block;
+  margin-left: 100px;
+  border: solid 1px #e7e8e9;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  background-color: #eaecee;
+}
+
+.genericLabelSmall {
+  color: #818284;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.genericLabel {
+  color: #818284;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.smallMap {
+  width: 300px;
+  height: 290px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+#map {
+  width: 300px;
+  height: 300px;
+}
+
+.greyBack {
+  padding-top: 1px;
+  background-color: #f0f0f0;
+}
+
+.footerDiv {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #939598;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  line-height: 1.8em;
+  text-align: center;
+}

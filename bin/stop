@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+KILL_CMD="/bin/kill -9 "
+PUMA_PID=`ps auxwwww | grep puma | grep sock | grep aiku | grep -v ack | grep -v grep | awk '{print $2}'`
+if [ "x${PUMA_PID}" != "x" ];then 
+   ${KILL_CMD} ${PUMA_PID}
+else
+   echo "No puma instance is running."
+   exit 1
+fi

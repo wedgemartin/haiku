@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @haiku %>
+
+<div>
+  <%= link_to "Edit this haiku", edit_haiku_path(@haiku) %> |
+  <%= link_to "Back to haikus", haikus_path %>
+
+  <%= button_to "Destroy this haiku", @haiku, method: :delete %>
+</div>
