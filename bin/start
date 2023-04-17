@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-puma -b tcp://localhost:3000 -t 5:64
-# if [ "${RAILS_ENV}" = "" -o "${RAILS_ENV}" = "development" ];then
-  # puma -b unix:///var/sockets/haiku_puma.sock -t 5:64
-# else
-  # puma -b unix:///var/sockets/haiku_puma.sock -w 2 -t 5:64
-# fi
+nginx
+
+# RAILS_ENV=production puma -C config/puma.rb config.ru -b tcp://localhost:3000 -t 5:64
+RAILS_ENV=production puma -C config/puma.rb config.ru -b unix:///var/sockets/haiku_puma.sock -t 5:64
