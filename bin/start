@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-if [ "${RAILS_ENV}" = "" -o "${RAILS_ENV}" = "development" ];then
-  puma -b unix:///var/sockets/haiku_puma.sock -t 5:64
-else
-  puma -b unix:///var/sockets/haiku_puma.sock -w 2 -t 5:64
-fi
+puma -b tcp://localhost:3000 -t 5:64
+# if [ "${RAILS_ENV}" = "" -o "${RAILS_ENV}" = "development" ];then
+  # puma -b unix:///var/sockets/haiku_puma.sock -t 5:64
+# else
+  # puma -b unix:///var/sockets/haiku_puma.sock -w 2 -t 5:64
+# fi
