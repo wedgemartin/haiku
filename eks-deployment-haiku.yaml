@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eks-deployment-haiku
+  namespace: mm
+  labels:
+    app: eks-haiku-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eks-haiku-app
+  template:
+    metadata:
+      labels:
+        app: eks-haiku-app
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - arm64
+      containers:
+      - name: haiku-container
+        image: 640447769314.dkr.ecr.us-west-1.amazonaws.com/haiku:1.0
+        ports:
+        - name: http
+          containerPort: 8080
+        imagePullPolicy: IfNotPresent
+      nodeSelector:
+        kubernetes.io/os: linux
