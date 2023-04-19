@@ -1,11 +1,14 @@
 haiku	
 640447769314.dkr.ecr.us-west-1.amazonaws.com/haiku
 
-kubectl -n mm expose deployment eks-mm-fe-deployment --target-port=8080  --port=8080 --type=NodePort  --name=mm-fe-nodeport
+kubectl -n haiku expose deployment eks-haiku-deployment --target-port=8080  --port=8080 --type=NodePort  --name=haiku-nodeport
 
-docker tag 31e0796bab4dab778b848fc003de6362c9d8a0fcb78e629d94f4c6acdab8e14d 640447769314.dkr.ecr.us-west-1.amazonaws.com/mm:1.1
-docker push 640447769314.dkr.ecr.us-west-1.amazonaws.com/mm:1.1
+docker tag 31e0796bab4dab778b848fc003de6362c9d8a0fcb78e629d94f4c6acdab8e14d 640447769314.dkr.ecr.us-west-1.amazonaws.com/haiku:1.1
+docker push 640447769314.dkr.ecr.us-west-1.amazonaws.com/haiku:1.1
 
 Expose the frontend. This will create a random port that needs to be accessible. Is currently 192.168.43.123 30315
 
-kubectl -n mm expose deployment eks-mm-fe-deployment --target-port=8080  --port=8080 --type=NodePort  --name=mm-fe-nodeport | more
+kubectl -n haiku expose deployment eks-haiku-deployment --target-port=8080  --port=8080 --type=NodePort  --name=haiku-nodeport 
+
+alias dif='aws ecr get-login-password --region us-west-1  | docker login --username AWS --password-stdin 640447769314.dkr.ecr.us-west-1.amazonaws.com/mm-frontend'
+

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eks-deployment-haiku
-  namespace: mm
+  namespace: haiku
   labels:
     app: eks-haiku-app
 spec:
@@ -25,11 +25,11 @@ spec:
                 values:
                 - arm64
       containers:
-      - name: haiku-container
-        image: 640447769314.dkr.ecr.us-west-1.amazonaws.com/haiku:1.0
+      - name: haiku
+        image: 640447769314.dkr.ecr.us-west-1.amazonaws.com/haiku:1.1
         ports:
         - name: http
-          containerPort: 8080
+          containerPort: 3000
         imagePullPolicy: IfNotPresent
       nodeSelector:
         kubernetes.io/os: linux

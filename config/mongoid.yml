@@ -4,16 +4,16 @@ development:
     # Defines the default client. (required)
     default:
       # Mongoid can connect to a URI accepted by the driver:
-      # uri: mongodb://user:password@mongodb.domain.com:27017/haiku_development
+      # uri: mongodb://user:password@mongodb.domain.com:27017/haiku_staging
 
       # Otherwise define the parameters separately.
       # This defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: haiku_development
+      database: haiku_staging
       # Provides the hosts the default client can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - localhost:27017
+        - 172.30.1.53:27017
       options:
         # Note that all options listed below are Ruby driver client options (the mongo gem).
         # Please refer to the driver documentation of the version of the mongo gem you are using
@@ -173,12 +173,22 @@ development:
     # indexes in the background by default. (default: false)
     # background_indexing: false
 
+production:
+  clients:
+    default:
+      database: haiku_staging
+      hosts: 
+        - 172.30.1.53:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
 staging:
   clients:
     default:
       database: haiku_staging
       hosts: 
-        - localhost:27017
+        - 172.30.1.53:27017
       options:
         read:
           mode: :primary
@@ -186,9 +196,9 @@ staging:
 test:
   clients:
     default:
-      database: haiku_test
+      database: haiku_staging
       hosts:
-        - localhost:27017
+        - 172.30.1.53:27017
       options:
         read:
           mode: :primary
