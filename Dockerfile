@@ -31,5 +31,7 @@ COPY config.ru .
 RUN gem install rails bundler
 RUN bundle install
 
+RUN (cd public/web ; npm install ; npm run build; rm -rf node_modules)
+
 COPY docker/entrypoint.sh /
 ENTRYPOINT [ "/bin/bash", "/entrypoint.sh" ]
