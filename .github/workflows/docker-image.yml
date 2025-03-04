@@ -41,7 +41,7 @@ jobs:
     - name: Run rake task to seed data
       run: bundle exec rake db:seed
     - name: Run rspec
-      run: bundle exec rspec spec/models
+      run: bundle exec rspec spec
 
   build-and-deploy:
     needs: test
