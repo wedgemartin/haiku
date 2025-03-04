@@ -138,7 +138,7 @@ class App extends Component {
     let newHaikus = [];
     for (let i = 0; i < this.state.haikus.length; i++) {
       let h = this.state.haikus[i];
-      if (h._id.$oid == haiku._id.$oid) {
+      if (h._id == haiku._id) {
         haiku.top = h.top;
         haiku.left = h.left;
         newHaikus.push(haiku);
@@ -181,7 +181,7 @@ class App extends Component {
         haiku.top = Math.abs(Math.random(window.innerHeight) * window.innerHeight);
         haiku.left = Math.abs(Math.random(window.innerWidth) * window.innerWidth);    
       }
-      haikus.push(<Haiku setHaiku={(data) => this.updateHaiku(data)} key={haiku._id.$oid} haiku={haiku} />);
+      haikus.push(<Haiku setHaiku={(data) => this.updateHaiku(data)} key={haiku._id} haiku={haiku} />);
     }
     return (
       <div onClick={() => this.setState({showOverlay: false})} onmousedrag={(event) => this.doMove(this, false, event)} style={{width: window.innerWidth, height: window.innerHeight, overflow: 'hidden'}}>

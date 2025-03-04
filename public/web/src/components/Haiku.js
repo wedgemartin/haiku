@@ -25,13 +25,13 @@ export default class Haiku extends React.Component {
 
   vote(direction) {
     let voteParams = {
-      uri: `${baseUrl}/api/v1/haiku/${this.props.haiku._id.$oid}/${direction}vote`,
+      uri: `${baseUrl}/api/v1/haiku/${this.props.haiku._id}/${direction}vote`,
       method: 'PUT',
     };
     if (this.props.haiku && this.props.haiku.myvote && this.props.haiku.myvote.direction === direction) {
       // We have already voted this direction. Delete the vote.
       voteParams = {
-        uri: `${baseUrl}/api/v1/haiku/${this.props.haiku._id['$oid']}/vote`,
+        uri: `${baseUrl}/api/v1/haiku/${this.props.haiku._id}/vote`,
         method: 'DELETE',
       };
     }
