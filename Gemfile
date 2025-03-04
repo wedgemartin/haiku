@@ -6,7 +6,7 @@ ruby "3.3.6"
 gem "rails", "~> 7.1.4.1"
 
 gem 'mongoid'
-gem "puma", "~> 5.0"
+gem "puma"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
