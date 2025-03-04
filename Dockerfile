@@ -2,9 +2,9 @@ FROM ruby:3.1.0
 
 EXPOSE 3000
 
-ENV INSTALL_PATH /var/apps/haiku
+ENV INSTALL_PATH=/var/apps/haiku
 
-ENV RAILS_ENV production
+ENV RAILS_ENV=production
 
 RUN mkdir -p $INSTALL_PATH
 
@@ -31,6 +31,5 @@ COPY config.ru .
 RUN gem install rails bundler
 RUN bundle install
 
-CMD nginx
-CMD $INSTALL_PATH/bin/start
-# CMD $INSTALL_PATH/bin/start
+COPY docker/entrypoint.sh /
+ENTRYPOINT [ "/bin/bash", "/entrypoint.sh" ]
