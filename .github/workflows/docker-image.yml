@@ -79,7 +79,7 @@ jobs:
         ECR_REPOSITORY: haiku
         IMAGE_TAG: ${{ github.sha }}
       with:
-        args: -n haiku set image deployment/eks-deployment-haiku haiku-api=640447769314.dkr.ecr.us-west-1.amazonaws.com/haiku:$IMAGE_TAG
+        args: -n haiku set image deployment/eks-deployment-haiku haiku=640447769314.dkr.ecr.us-west-1.amazonaws.com/haiku:$IMAGE_TAG
     - name: verify deployment
       uses: kodermax/kubectl-aws-eks@master
       env:
