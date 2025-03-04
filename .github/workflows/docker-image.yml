@@ -79,21 +79,10 @@ jobs:
         ECR_REPOSITORY: haiku
         IMAGE_TAG: ${{ github.sha }}
       with:
-        args: -n haiku set image deployment/eks-haiku-deployment haiku-api=640447769314.dkr.ecr.us-west-1.amazonaws.com/haiku:$IMAGE_TAG
+        args: -n haiku set image deployment/eks-deployment-haiku haiku-api=640447769314.dkr.ecr.us-west-1.amazonaws.com/haiku:$IMAGE_TAG
     - name: verify deployment
       uses: kodermax/kubectl-aws-eks@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
       with:
-        args: -n haiku rollout status deployment/eks-haiku-deployment
-    - name: Send Slack notification
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_CHANNEL: development
-        SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-        SLACK_ICON: https://github.com/rtCamp.png?size=48
-        SLACK_MESSAGE: 'Deploying to STAGING API :rocket:'
-        SLACK_TITLE: Deploying...
-        SLACK_USERNAME: Marvin
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
- 
+        args: -n haiku rollout status deployment/eks-deployment-haiku
