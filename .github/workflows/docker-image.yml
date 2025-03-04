@@ -1,0 +1,95 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    steps:
+    - uses: actions/checkout@v3
+    - name: set up ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.1.0
+        bundler-cache: false
+    - name: Get mongo repo
+      run: echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+    - name: APT update
+      run: sudo apt update -y
+    - name:  Install mongo
+      run: sudo apt install -y mongodb-org
+    - name: Start mongo
+      run: sudo systemctl start mongod.service
+    - name: Check mongo process
+      run: ps auxwwwww | grep -i mongo
+    - name: Check mongo port listener
+      run: netstat -na | grep LISTEN
+    - name: Check mongo config
+      run: sudo cat /etc/mongod.conf
+    - name: Run bundle install
+      run: bundle install
+    - name: Run rake task to populate database
+      run: bundle exec rake db:mongoid:create_indexes
+    - name: Run rake task to seed data
+      run: bundle exec rake db:seed
+    - name: Run rspec
+      run: bundle exec rspec spec/models
+
+  build-and-deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup QEMU
+      uses: docker/setup-qemu-action@v1
+    - name: Set up docker Buildx
+      uses: docker/setup-buildx-action@v1
+    - uses: actions/checkout@v3
+    - name: Build the docker image
+      run: docker buildx build . --file ./Dockerfile.rails --platform linux/arm64 -t haiku:latest -t haiku:${{ github.sha }} --load
+    - name: Push resulting image
+      id: ecr
+      uses: jwalton/gh-ecr-push@v1
+      with:
+        access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        region: us-west-1
+        image: haiku:${{ github.sha }}
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    - name: deploy to cluster
+      uses: kodermax/kubectl-aws-eks@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: haiku
+        IMAGE_TAG: ${{ github.sha }}
+      with:
+        args: -n haiku set image deployment/eks-haiku-deployment haiku-api=640447769314.dkr.ecr.us-west-1.amazonaws.com/haiku:$IMAGE_TAG
+    - name: verify deployment
+      uses: kodermax/kubectl-aws-eks@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
+      with:
+        args: -n haiku rollout status deployment/eks-haiku-deployment
+    - name: Send Slack notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_CHANNEL: development
+        SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+        SLACK_ICON: https://github.com/rtCamp.png?size=48
+        SLACK_MESSAGE: 'Deploying to STAGING API :rocket:'
+        SLACK_TITLE: Deploying...
+        SLACK_USERNAME: Marvin
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+ 

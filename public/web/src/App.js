@@ -108,8 +108,15 @@ class App extends Component {
             console.log('Something is wrong with our fetch: ' + data);
             return;
           } else {
+            let goodHaikus = [];
+            for (let i = 0; i < haikus.length; i++) {
+              const h = haikus[i];
+              if (h.downvotes < 5 || (h.upvotes > h.downvotes)) {
+                goodHaikus.push(h);
+              }
+            }
             let interval = setInterval(that.doMove, 50, that, true);
-            that.setState({interval: interval, haikus: haikus});
+            that.setState({interval: interval, haikus: goodHaikus});
           }
         }
       });
