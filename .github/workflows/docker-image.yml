@@ -53,7 +53,7 @@ jobs:
       uses: docker/setup-buildx-action@v1
     - uses: actions/checkout@v3
     - name: Build the docker image
-      run: docker buildx build . --file ./Dockerfile.rails --platform linux/arm64 -t haiku:latest -t haiku:${{ github.sha }} --load
+      run: docker buildx build . --platform linux/arm64 -t haiku:latest -t haiku:${{ github.sha }} --load
     - name: Push resulting image
       id: ecr
       uses: jwalton/gh-ecr-push@v1
