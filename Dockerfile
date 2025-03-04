@@ -12,7 +12,7 @@ RUN mkdir -p /var/sockets
 
 WORKDIR $INSTALL_PATH
 
-RUN apt-get update && apt-get install -y --no-install-recommends nginx
+RUN apt-get update && apt-get install -y --no-install-recommends nginx npm
 
 RUN mkdir -p tmp/pids
 
