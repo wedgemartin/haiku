@@ -4,14 +4,14 @@
   "private": true,
   "dependencies": {
     "font-picker-react": "^3.5.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-timeago": "^4.4.0",
     "request": "2.88.0",
     "syllable": "^5.0.0"
   },
   "devDependencies": {
-    "react-scripts": "^3.4.3"
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "PORT=4000 react-scripts start",
