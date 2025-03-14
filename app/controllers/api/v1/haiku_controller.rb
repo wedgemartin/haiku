@@ -12,15 +12,16 @@ class Api::V1::HaikuController < ApplicationController
 
   def upvote
     haiku_id = params[:haiku_id]
+    haiku = Haiku.find(haiku_id)
     source = "#{request.env['HTTP_X_FORWARDED_HOST']}-#{request.env['HTTP_USER_AGENT']}"
     vote_check = Vote.where(haiku_id: haiku_id, source: source).last
     if vote_check
       if vote_check.direction == 'down'
         vote_check.direction = 'up'
         vote_check.save!
-        render json: {haiku: haiku.reload.as_json_for_api}, status: :ok
+        render json: {haiku: haiku.reload.as_json_for_api}, status: :ok and return
       else
-        render json: {error: 'Only one vote permitted per haiku'}, status: 422
+        render json: {error: 'Only one vote permitted per haiku'}, status: 422 and return
       end
     end
     vote = Vote.new(haiku_id: haiku_id, direction: 'up', source: source)
@@ -31,15 +32,16 @@ class Api::V1::HaikuController < ApplicationController
 
   def downvote
     haiku_id = params[:haiku_id]
+    haiku = Haiku.find(haiku_id)
     source = "#{request.env['HTTP_X_FORWARDED_HOST']}-#{request.env['HTTP_USER_AGENT']}"
     vote_check = Vote.where(haiku_id: haiku_id, source: source).last
     if vote_check
       if vote_check.direction == 'up'
         vote_check.direction = 'down'
         vote_check.save!
-        render json: {haiku: haiku.reload.as_json_for_api}, status: :ok
+        render json: {haiku: haiku.reload.as_json_for_api}, status: :ok and return
       else
-        render json: {error: 'Only one vote permitted per haiku'}, status: 422
+        render json: {error: 'Only one vote permitted per haiku'}, status: 422 and return
       end
     end
     vote = Vote.new(haiku_id: haiku_id, direction: 'down', source: source)

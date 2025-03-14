@@ -1,10 +1,10 @@
 import React from 'react';
 import Login from './components/Login';
-import request from 'request';
+// import request from 'request';
 
 const baseUrl = window.location.protocol + '//' + window.location.host;
 
-export const getUserInfo = (app, username=undefined) => {
+export const getUserInfo = async (app, username=undefined) => {
   console.log('GET USER INFO CALLED WITH USERNAME: ' + username);
   let userUrl = `${baseUrl}/api/v1/users/me?include_area=true&include_counts=true`;
   let that = app;
@@ -12,30 +12,26 @@ export const getUserInfo = (app, username=undefined) => {
     userUrl = `${baseUrl}/api/v1/users/${username}`;
   }
   try {
-    request({uri: userUrl}, function(err, data)  {
-      if (data) {
-        let parsedBody = JSON.parse(data.body);
-        if (parsedBody && parsedBody['users'] && parsedBody['users']['area']) {
-          if (!username) {
-            that.setState({
-              user: parsedBody['users'],
-              area: parsedBody['users']['area'],
-              messageCounter: parsedBody['users']['unread_message_count'],
-              notificationCounter: parsedBody['users']['unseen_notifications_count'],
-            });
-          } else {
-            console.log('  RETURNING PARSED BODY USERS: ' + JSON.stringify(parsedBody['users']));
-            let cusers = that.state.conversationUsers || [];
-            cusers.push(parsedBody['users']);
-            that.setState({conversationUsers: cusers});
-          }
-        } else {
-          that.setState({login: <Login mainApp={that} />});
-        }
+    const data = await fetch(userUrl);
+    if (data && data.status === 200) {
+    let parsedBody = await data.json();
+    if (parsedBody && parsedBody['users'] && parsedBody['users']['area']) {
+      if (!username) {
+        that.setState({
+          user: parsedBody['users'],
+          area: parsedBody['users']['area'],
+          messageCounter: parsedBody['users']['unread_message_count'],
+          notificationCounter: parsedBody['users']['unseen_notifications_count'],
+        });
       } else {
-        console.log('Got nothing: err is: ' + err);
+        console.log('  RETURNING PARSED BODY USERS: ' + JSON.stringify(parsedBody['users']));
+        let cusers = that.state.conversationUsers || [];
+        cusers.push(parsedBody['users']);
+        that.setState({conversationUsers: cusers});
       }
-    });
+    } else {
+      that.setState({login: <Login mainApp={that} />});
+    }
   } catch(e) {
     console.log('Me call unsuccessful.');
     if ( e.statusCode && e.statusCode === 401) {
@@ -46,22 +42,19 @@ export const getUserInfo = (app, username=undefined) => {
   }
 }
 
-export const updateUserInfo = (app, data) => {
+export const updateUserInfo = async (app, data) => {
   console.log('Submitting post...');
   console.log('Data is...');
   console.log(data);
-  let requestData = {
-    uri: `${baseUrl}/api/v1/users/me?include_area=true&include_counts=true`,
-    method: 'PUT'
-  };
+  const url = `${baseUrl}/api/v1/users/me?include_area=true&include_counts=true`;
+  let requestData = new FormData();
   if (!data['uploadedStringImage']) {
-    requestData['headers'] = {'content-type': 'application/json'};
-    requestData['body'] = JSON.stringify({'user': {'username': data['username'], 'summary': data['summary'], 'conv_block_users': data['conv_block_users']}});
+    let requestData = new FormData();
+    let requestData.append('body', JSON.stringify({'user': {'username': data['username'], 'summary': data['summary'], 'conv_block_users': data['conv_block_users']}}));
   } else {
     console.log('Got uploaded image.');
     let imgBuf = new Buffer(data['uploadedStringImage'].replace(/^data:image\/\w+;base64,/, ""),'base64');
-    requestData['headers'] = {'content-type': 'multipart/form-data'};
-    requestData['multipart'] = {
+    requestData.append('data', JSON.stringify({
       data: [
         {
           'Content-Disposition': 'form-data; name="user[username]"',
@@ -80,26 +73,19 @@ export const updateUserInfo = (app, data) => {
           'body': imgBuf,
         }
       ],
-    }
+    }));
   }
   try {
-    request(requestData, (err, userData) => {
-      if (userData && userData.body) {
-        let updatedUser = JSON.parse(userData.body)['users'];
-        // TODO - Do something better than just alert here...
-        // alert('Update successful.');
-        if (data['uploadedStringImage']) {
-          // reload so that all occurences of the avatar get updated.
-          window.location.reload();
-        } else {
-          if (app && app.setState) {
-            app.setState({user: updatedUser});
-          }
-        }
-      } else if (err) {
-        console.log('[updateUserInfo] update error: ' + err);
+    const data = await fetch(url, {method: 'POST', body: requestData});
+    const userData = await data.json();
+    const updatedUser = userData['users'];
+    if (data['uploadedStringImage']) {
+      window.location.reload();
+    } else {
+      if (app && app.setState) {
+        app.setState({user: updatedUser});
       }
-    });
+    }
   } catch(e) {
      console.log('[updateUserInfo] caught update error: ' + e);
   }

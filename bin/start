@@ -1,6 +1,3 @@
 #!/usr/bin/env bash
 
-nginx
-
-# RAILS_ENV=production puma -C config/puma.rb config.ru -b tcp://localhost:3000 -t 5:64
-RAILS_ENV=production puma -C config/puma.rb config.ru -b unix:///var/sockets/haiku_puma.sock -t 5:64
+puma -C config/puma.rb config.ru -b unix:///var/sockets/haiku_puma.sock -t 5:64

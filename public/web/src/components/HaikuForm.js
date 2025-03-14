@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import request from 'request';
+// import request from 'request';
 import FontPicker from 'font-picker-react';
 import { syllable } from 'syllable';
 
@@ -25,7 +25,7 @@ export default class HaikuForm extends React.Component {
     };
   }
 
-  submit() {
+  async submit() {
     let syncError = false;
     if (!this.state.line1 || !this.state.line2 || !this.state.line3) {
       this.setState({error: 'Must complete three lines for a haiku'});
@@ -57,26 +57,33 @@ export default class HaikuForm extends React.Component {
     if (syncError) {
       return;
     }
-    let haikuParams = {
-      uri: `${baseUrl}/api/v1/haiku`,
-      method: 'POST',
-      form: {line1: this.state.line1, line2: this.state.line2, line3: this.state.line3, username: this.state.username, font: this.state.activeFontFamily}
-    };
+    let url = `${baseUrl}/api/v1/haiku`;
     let that = this;
+    let fd = new FormData();
+    fd.append('line1', this.state.line1);
+    fd.append('line2', this.state.line2);
+    fd.append('line3', this.state.line3);
+    fd.append('username', this.state.username);
+    fd.append('font', this.state.activeFontFamily);
     try {
-      request(haikuParams, function(err, resp, data) {
-        if (err) {
-          console.log('Haiku submit error: ' + err);
-        } else {
-          let haiku = JSON.parse(data)['haiku'];
-          if (haiku) {
-            that.props.addHaiku(haiku);
-            that.setState({error: '', line1error: false, line2error: false, line3error: false, line1: '', line2: '', line3: '', message: 'Haiku added successfully!'});
-          } else {
-            console.log('Bad haiku response?' + JSON.stringify(resp));
-          }
-        }
-      });
+      const data = await fetch(url, {body: fd, method: 'POST'});
+      let haikuJson = await data.json();
+      let haiku = haikuJson['haiku'];
+      if (haiku) {
+        that.props.addHaiku(haiku);
+        that.setState({
+          error: '',
+          line1error: false,
+          line2error: false,
+          line3error: false,
+          line1: '',
+          line2: '',
+          line3: '',
+          message: 'Haiku added successfully!'
+        });
+      } else {
+        console.log('Bad haiku response?' + data.status);
+      }
     } catch(e) {
       console.log('Error posting haiku data: ' + e);
     }
