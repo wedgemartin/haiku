@@ -10,6 +10,13 @@ class Api::V1::HaikuController < ApplicationController
     render json: {haiku: haiku.as_json_for_api}, status: :ok
   end
 
+  def delete_vote
+    vote = Vote.find(params[:vote_id])
+    vote.destroy!
+    haiku = Haiku.find(params[:haiku_id])
+    render json: {haiku: haiku.as_json_for_api}, status: :ok
+  end
+
   def upvote
     haiku_id = params[:haiku_id]
     haiku = Haiku.find(haiku_id)
@@ -19,7 +26,7 @@ class Api::V1::HaikuController < ApplicationController
       if vote_check.direction == 'down'
         vote_check.direction = 'up'
         vote_check.save!
-        render json: {haiku: haiku.reload.as_json_for_api}, status: :ok and return
+        render json: {haiku: haiku.reload.as_json_for_api(request)}, status: :ok and return
       else
         render json: {error: 'Only one vote permitted per haiku'}, status: 422 and return
       end
@@ -39,7 +46,7 @@ class Api::V1::HaikuController < ApplicationController
       if vote_check.direction == 'up'
         vote_check.direction = 'down'
         vote_check.save!
-        render json: {haiku: haiku.reload.as_json_for_api}, status: :ok and return
+        render json: {haiku: haiku.reload.as_json_for_api(request)}, status: :ok and return
       else
         render json: {error: 'Only one vote permitted per haiku'}, status: 422 and return
       end

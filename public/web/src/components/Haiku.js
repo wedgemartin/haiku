@@ -19,7 +19,7 @@ function Haiku({data}) {
     if (haiku?.myvote?.direction === direction) {
       // We have already voted this direction. Delete the vote.
       voteParams = {
-        uri: `/api/v1/haiku/${haiku._id}/vote`,
+        uri: `/api/v1/haiku/${haiku._id}/vote/${haiku.myvote._id}`,
         method: 'DELETE',
       };
     }

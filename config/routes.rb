@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       match '/haiku' => 'haiku#index', via: :get
       match '/haiku/:haiku_id/upvote' => 'haiku#upvote', via: :put
       match '/haiku/:haiku_id/downvote' => 'haiku#downvote', via: :put
+      match '/haiku/:haiku_id/vote/:vote_id' => 'haiku#delete_vote', via: :delete
     end
   end
 end
