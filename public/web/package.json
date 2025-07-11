@@ -11,11 +11,16 @@
     "syllable": "^5.0.0"
   },
   "devDependencies": {
-    "react-scripts": "^5.0.1"
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "@types/react-timeago": "^4.1.6",
+    "react-scripts": "^5.0.1",
+    "typescript": "^5.3.3"
   },
   "scripts": {
     "start": "PORT=4000 react-scripts start",
-    "build": "react-scripts build && mkdir build/static/media && cp src/images/*.png build/static/media/",
+    "build": "react-scripts build && mkdir -p build/static/media && cp src/images/*.png build/static/media/",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
